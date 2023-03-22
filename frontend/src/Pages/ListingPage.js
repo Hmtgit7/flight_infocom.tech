@@ -63,10 +63,10 @@ const ListingPage = () => {
                 return (
                   <Tr>
               <Td>{chat.flightNumber}</Td>
-                <Td>{chat.Airline}</Td>
-                <Td>{chat.Destination}</Td>
-                <Td>{chat.Detail}</Td>
-                <Td>{chat.Terminal}</Td>
+                <Td>{chat.airline}</Td>
+                <Td>{chat.destination}</Td>
+                <Td>{chat.departureTime}</Td>
+                <Td>{chat.terminal}</Td>
                 <Td>{chat.gateNumber}</Td>
                   </Tr>
                 )

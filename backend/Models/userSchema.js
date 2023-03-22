@@ -1,4 +1,4 @@
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
     flightNumber:{
@@ -16,23 +16,22 @@ const userSchema = new mongoose.Schema({
         required:true,
         max:50,
     },
-    detail: { 
+    departureTime: {
         type: String,
         required: true,
-        max: 50,
     },
     terminal:{
-        type:String,
+        type:Number,
         required:true,
         max:2,
     },
     gateNumber:{
-        type:String,
+        type:Number,
         required:true,
         max:2,
     }
 })
 
-const User=mongoose.model('USER',userSchema)
+const User = mongoose.model('USER', userSchema)
 
-module.exports=User;
+module.exports = User;

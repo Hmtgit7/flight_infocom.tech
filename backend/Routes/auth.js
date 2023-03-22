@@ -15,29 +15,29 @@ dotenv.config({ path: './config.env' })
 
 router.use(cors());
 
-router.post('/gpt', async (req, res) => {
-    try {
-        const prompt = req.body.prompt;
+// router.post('/gpt', async (req, res) => {
+//     try {
+//         const prompt = req.body.prompt;
 
-        const response = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: `${prompt}`,
-            temperature: 0, // Higher values means the model will take more risks.
-            max_tokens: 3000, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
-            top_p: 1, // alternative to sampling with temperature, called nucleus sampling
-            frequency_penalty: 0.5, // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
-            presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
-        });
+//         const response = await openai.createCompletion({
+//             model: "text-davinci-003",
+//             prompt: `${prompt}`,
+//             temperature: 0, // Higher values means the model will take more risks.
+//             max_tokens: 3000, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
+//             top_p: 1, // alternative to sampling with temperature, called nucleus sampling
+//             frequency_penalty: 0.5, // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+//             presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+//         });
 
-        res.status(200).send({
-            bot: response.data.choices[0].text
-        });
+//         res.status(200).send({
+//             bot: response.data.choices[0].text
+//         });
 
-    } catch (error) {
-        console.error(error)
-        res.status(500).send(error || 'Something went wrong');
-    }
-})
+//     } catch (error) {
+//         console.error(error)
+//         res.status(500).send(error || 'Something went wrong');
+//     }
+// })
 
 
 
@@ -118,10 +118,10 @@ router.get('/home',async(req,res)=>{
 
 
 router.post('/home', async(req, res) => {
-    const { flightNumber, airline, destination, detail, terminal, gateNumber } = req.body;
+    const { flightNumber, airline, destination, departureTime, terminal, gateNumber } = req.body;
     console.log(req.body)
 
-    if (!flightNumber || !airline || !destination || !detail || !terminal || !gateNumber) {
+    if (!flightNumber || !airline || !destination || !departureTime || !terminal || !gateNumber) {
         return res.status(422).json({ error: "please fill all the entries" });
     }
 
@@ -131,7 +131,8 @@ router.post('/home', async(req, res) => {
         if(userExist){
             return res.status(422).json({ error: "Already exist" })
         }
-        const user = new User({ flightNumber, airline, destination, detail, terminal, gateNumber })
+        const user = new User({ flightNumber, airline, destination, departureTime, terminal, gateNumber })
+        console.log(user);
         const userRegister=user.save()
         if (userRegister){
             res.status(201).json({ message: "new data added" });
@@ -149,10 +150,10 @@ router.post('/home', async(req, res) => {
 
 
 // router.post('/home' ,(req,res)=>{
-//     const { flightNumber, airline, destination, detail, terminal, gateNumber }=req.body;  
+//     const { flightNumber, airline, destination, departureTime, terminal, gateNumber }=req.body;  
 //     console.log(req.body)
 
-//     if (!flightNumber || !airline || !destination || !detail || !terminal || !gateNumber){
+//     if (!flightNumber || !airline || !destination || !departureTime || !terminal || !gateNumber){
 //         return res.status(422).json({error:"please fill all the entries"});
 //     }
 
@@ -163,7 +164,7 @@ router.post('/home', async(req, res) => {
 //         }
     
 
-//     const user = new User({ flightNumber, airline, destination, detail, terminal, gateNumber })
+//     const user = new User({ flightNumber, airline, destination, departureTime, terminal, gateNumber })
 
 //     user.save().then(()=>{
 //         res.status(201).json({message:"new data added"});

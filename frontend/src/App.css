@@ -3,11 +3,12 @@
 .App {
   min-height: 100vh;
   display: flex;
+  justify-content: center;
   /* background-image: url("./background.png");
   background-position: center;
   background-size: cover; */
 
-  background-color: azure;
+  background-color: rgb(154, 203, 203);
 }
 
 ::-webkit-scrollbar {
