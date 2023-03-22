@@ -1,0 +1,29 @@
+{
+  "name": "flight-infocom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hmtgit7/flight-infocom.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hmtgit7/flight-infocom/issues"
+  },
+  "homepage": "https://github.com/Hmtgit7/flight-infocom#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.2",
+    "nodemon": "^2.0.21",
+    "openai": "^3.2.1",
+    "react-bootstrap": "^2.7.2"
+  }
+}
