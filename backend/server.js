@@ -1,16 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose')
-const dotenv=require('dotenv')
+const dotenv = require('dotenv')
 const app = express();
 
 
 
 
 
-dotenv.config({path:'./config.env'})    
+dotenv.config({ path: './config.env' })
 require('./config/db')
 
-const User=require('./Models/userSchema')
+const User = require('./Models/userSchema')
 
 app.use(express.json())
 
@@ -18,12 +18,28 @@ app.use(require('./Routes/auth'))
 
 
 
-const PORT =process.env.PORT||5000;
+const PORT = process.env.PORT || 5000;
+
+//------------deployment-------------
+const _dirname1 = path.resolve();
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(_dirname1, "/frontend/build")))
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(_dirname1, "frontend", "build", "index.html"))
+    })
+}
+else {
+    app.get('/', (req, res) => {
+        res.send("API running sucessful")
+    })
+}
+//------------deployment-------------
 
 
-const middleware=(req,res,next)=>{
+const middleware = (req, res, next) => {
     console.log(`hello this is the middleware`)
-    next(); 
+    next();
 }
 
 
